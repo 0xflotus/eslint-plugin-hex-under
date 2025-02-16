@@ -9,7 +9,7 @@ module.exports = [
       "hex-under": eslintPluginHexUnder,
     },
     rules: {
-      "hex-under/hex-under-256": ["error", { limit: 255 }],
+      "hex-under/hex-under": ["error", { limit: 255 }],
     },
   },
 ];
