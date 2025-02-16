@@ -1,6 +1,6 @@
 # eslint-plugin-hex-under
 
-## hex-under-256
+## hex-under
 
 This ESLint plugin proves, if you use hexadecimal numbers in your variable declaration code, that its value is less than a specified value (default: 255). If you use a hexadecimal number greater or equal this specified value, it will be transformed to its decimal value.
 
