@@ -2,7 +2,7 @@
 
 ## hex-under
 
-This ESLint plugin proves, if you use hexadecimal numbers in your variable declaration code, that its value is less than a specified value (default: 255). If you use a hexadecimal number greater or equal this specified value, it will be transformed to its decimal value.
+This ESLint plugin proves, if you use hexadecimal numbers in your variable declaration code, that its value is less than or equal a specified value (default: 255). If you use a hexadecimal number greater than this specified value, it will be transformed to its decimal value.
 
 ### Example
 
