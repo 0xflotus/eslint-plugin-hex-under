@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "0xflotus",
-  "license": "ISC",
+  "license": "MIT",
   "description": "This ESLint rule proves that hex numbers are less than 256",
   "devDependencies": {
     "eslint": "9.20.1",
