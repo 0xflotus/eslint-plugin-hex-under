@@ -1,6 +1,7 @@
 {
   "name": "eslint-plugin-hex-under",
   "version": "0.0.1",
+  "main": "eslint-plugin-hex-under.js",
   "scripts": {
     "lint": "prettier . --check && eslint .",
     "test": "node hex-under-256.test.js"

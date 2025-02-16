@@ -2,7 +2,7 @@
 
 ## hex-under-256
 
-This ESLint plugin proves, if you use hexadecimal numbers in your variable declaration code, that its value is less than 256. If you use a hexadecimal number greater or equal 256, it will be transformed to its decimal value.
+This ESLint plugin proves, if you use hexadecimal numbers in your variable declaration code, that its value is less than a specified value (default: 255). If you use a hexadecimal number greater or equal this specified value, it will be transformed to its decimal value.
 
 ### Example
 
@@ -15,4 +15,24 @@ const signal = 0x21b;
 
 // This will be transformed to:
 const signal = 539;
+```
+
+## Integration
+
+```js
+// eslint.config.js
+
+const eslintPluginHexUnder = require("./eslint-plugin-hex-under");
+
+module.exports = [
+  {
+    files: ["*.js"],
+    plugins: {
+      "hex-under": eslintPluginHexUnder,
+    },
+    rules: {
+      "hex-under/hex-under-256": ["error", { limit: 255 }],
+    },
+  },
+];
 ```

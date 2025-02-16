@@ -2,31 +2,43 @@ module.exports = {
   meta: {
     type: "problem",
     docs: {
-      description: "Proves that a hexadecimal number must be less than 256.",
+      description: "Proves that a hexadecimal number must be less than a specified value. Default is 255.",
     },
     fixable: "code",
-    schema: [],
+    schema: [
+      {
+        type: "object",
+        properties: {
+          limit: {
+            type: "integer",
+            minimum: 1,
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+    messages: {
+      valueOver:
+        "Value of '{{ variableName }}' must be less than {{ limitPlusOne }}. {{ over255Raw }} is greater than {{ limit }}.",
+    },
   },
   create(context) {
+    const limit = context.options[0]?.limit || 255;
     return {
       VariableDeclarator(node) {
-        if (
-          node.parent.kind === "const" ||
-          node.parent.kind === "let" ||
-          node.parent.kind === "var"
-        ) {
+        if (["const", "let", "var"].some((el) => el === node.parent.kind)) {
           if (
             node.init &&
             node.init.type === "Literal" &&
             node.init.raw.startsWith("0x")
           ) {
-            const limit = 0xff;
             if (parseInt(node.init.value) > limit) {
               context.report({
                 node,
-                message:
-                  "Value of '{{ variableName }}' must be less than 256. {{ over255Raw }} is greater than 255.",
+                messageId: "valueOver",
                 data: {
+                  limit: limit,
+                  limitPlusOne: limit + 1,
                   over255Raw: node.init.raw,
                   variableName: node.id.name,
                 },

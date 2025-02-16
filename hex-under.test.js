@@ -1,5 +1,5 @@
 const { RuleTester } = require("eslint");
-const hexUnder256Rule = require("./hex-under-256");
+const hexUnder256Rule = require("./hex-under");
 
 const ruleTester = new RuleTester({
   languageOptions: { ecmaVersion: 2015 },
@@ -8,7 +8,12 @@ const ruleTester = new RuleTester({
 ruleTester.run("hex-under-256", hexUnder256Rule, {
   valid: [
     {
+      options: [{ limit: 255 }],
       code: "const foo = 0xff;",
+    },
+    {
+      options: [{ limit: 256 }],
+      code: "const foo = 0x100;",
     },
   ],
   invalid: [
@@ -23,6 +28,7 @@ ruleTester.run("hex-under-256", hexUnder256Rule, {
 ruleTester.run("hex-under-256", hexUnder256Rule, {
   valid: [
     {
+      options: [{ limit: 255 }],
       code: "let foo = 0xff;",
     },
   ],
@@ -38,6 +44,7 @@ ruleTester.run("hex-under-256", hexUnder256Rule, {
 ruleTester.run("hex-under-256", hexUnder256Rule, {
   valid: [
     {
+      options: [{ limit: 256 }],
       code: "var foo = 0xff;",
     },
   ],
