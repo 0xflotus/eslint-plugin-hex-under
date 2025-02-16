@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-hex-under",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "eslint-plugin-hex-under.js",
   "scripts": {
     "lint": "prettier . --check && eslint .",
