@@ -6,6 +6,10 @@
     "lint": "prettier . --check && eslint .",
     "test": "node hex-under-256.test.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xflotus/eslint-plugin-hex-under.git"
+  },
   "keywords": [],
   "author": "0xflotus",
   "license": "MIT",
