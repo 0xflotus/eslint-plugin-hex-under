@@ -7,10 +7,10 @@ This ESLint plugin proves, if you use hexadecimal numbers in your variable decla
 ### Example
 
 ```js
-// valid
+// valid with { limit: 255 }
 const signal = 0xef;
 
-// invalid
+// invalid with { limit: 255 }
 const signal = 0x21b;
 
 // This will be transformed to:
