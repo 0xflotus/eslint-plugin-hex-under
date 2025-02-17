@@ -13,7 +13,7 @@ const signal = 0xef;
 // invalid with { limit: 255 }
 const signal = 0x21b;
 
-// This will be transformed to:
+// This can be transformed to:
 const signal = 539;
 ```
 
