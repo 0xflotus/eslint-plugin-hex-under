@@ -2,7 +2,8 @@ module.exports = {
   meta: {
     type: "problem",
     docs: {
-      description: "Proves that a hexadecimal number must be less than a specified value. Default is 255.",
+      description:
+        "Proves that a hexadecimal number must be less than a specified value. Default is 255.",
     },
     fixable: "code",
     schema: [
