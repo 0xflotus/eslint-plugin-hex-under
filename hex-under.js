@@ -19,7 +19,7 @@ module.exports = {
     ],
     messages: {
       valueOver:
-        "Value of '{{ variableName }}' must be less than {{ limitPlusOne }}. {{ over255Raw }} is greater than {{ limit }}.",
+        "Value of '{{ variableName }}' must be less than or equal {{ limit }}. {{ overValue }} ({{ over255Raw }}) is greater than {{ limit }}.",
     },
   },
   create(context) {
@@ -38,8 +38,8 @@ module.exports = {
                 messageId: "valueOver",
                 data: {
                   limit: limit,
-                  limitPlusOne: limit + 1,
                   over255Raw: node.init.raw,
+                  overValue: node.init.value,
                   variableName: node.id.name,
                 },
                 fix(fixer) {
