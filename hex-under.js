@@ -19,38 +19,35 @@ module.exports = {
       },
     ],
     messages: {
-      valueOver:
-        "Value of '{{ variableName }}' must be less than or equal {{ limit }}. {{ overValue }} ({{ over255Raw }}) is greater than {{ limit }}.",
+      valueOverGeneral:
+        "This number must be less than or equal {{ limit }}. {{ overValue }} ({{ over255Raw }}) is greater than {{ limit }}.",
     },
   },
   create(context) {
     const limit = context.options[0]?.limit || 255;
     return {
-      VariableDeclarator(node) {
-        if (["const", "let", "var"].some((el) => el === node.parent.kind)) {
-          if (
-            node.init &&
-            node.init.type === "Literal" &&
-            node.init.raw.startsWith("0x")
-          ) {
-            if (parseInt(node.init.value) > limit) {
-              context.report({
-                node,
-                messageId: "valueOver",
-                data: {
-                  limit: limit,
-                  over255Raw: node.init.raw,
-                  overValue: node.init.value,
-                  variableName: node.id.name,
-                },
-                fix(fixer) {
-                  return fixer.replaceText(
-                    node.init,
-                    parseInt(node.init.value),
-                  );
-                },
-              });
-            }
+      onCodePathEnd: function (_codePath, node) {
+        const tokens =
+          node.tokens?.filter(
+            (token) => token.type === "Numeric" && token.value.startsWith("0x"),
+          ) || [];
+        for (const token of tokens) {
+          if (token.value > limit) {
+            context.report({
+              node: token,
+              messageId: "valueOverGeneral",
+              data: {
+                limit: limit,
+                over255Raw: token.value,
+                overValue: parseInt(token.value),
+              },
+              fix(fixer) {
+                return fixer.replaceText(
+                  token,
+                  parseInt(token.value),
+                );
+              },
+            });
           }
         }
       },
