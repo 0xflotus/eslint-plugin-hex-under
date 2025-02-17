@@ -1,6 +1,6 @@
 # eslint-plugin-hex-under
 
-Sometimes it's really hard for humans to read hexadecimal numbers and know the exact decimal value. 
+Sometimes it's really hard for humans to read hexadecimal numbers and know the exact decimal value.
 
 ## hex-under
 
@@ -35,7 +35,6 @@ let func = () => 2748;
 function add(a, b) {
   return a + b + 256;
 }
-
 ```
 
 ## Integration
