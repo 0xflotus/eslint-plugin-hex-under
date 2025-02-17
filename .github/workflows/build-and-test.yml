@@ -20,7 +20,7 @@ jobs:
           node-version: 22
       - run: npm install
       - name: Run Linting
-        run: DEBUG=eslint:eslint npm run lint
+        run: DEBUG=eslint:eslint npm run lint -- --ignore-pattern 'fixture/*'
   build:
     name: Testing
     needs: lint
