@@ -21,6 +21,8 @@ module.exports = {
     messages: {
       valueOverGeneral:
         "This number must be less than or equal {{ limit }}. {{ overValue }} ({{ over255Raw }}) is greater than {{ limit }}.",
+      valueOverGeneralBigInt:
+        "This bigint must be less than or equal {{ limit }}. {{ overValue }} ({{ over255Raw }}) is greater than {{ limit }}.",
     },
   },
   create(context) {
@@ -29,23 +31,37 @@ module.exports = {
       onCodePathEnd: function (_codePath, node) {
         const tokens =
           node.tokens?.filter(
-            (token) => token.type === "Numeric" && token.value.startsWith("0x"),
+            (token) =>
+              ["Numeric", "Identifier"].some((el) => el === token.type) &&
+              token.value.startsWith("0x"),
           ) || [];
         for (const token of tokens) {
           const value = parseInt(token.value);
           if (value > limit) {
-            context.report({
-              node: token,
-              messageId: "valueOverGeneral",
-              data: {
-                limit: limit,
-                over255Raw: token.value,
-                overValue: value,
-              },
-              fix(fixer) {
-                return fixer.replaceText(token, value);
-              },
-            });
+            if (token.value.endsWith("n")) {
+              context.report({
+                node: token,
+                messageId: "valueOverGeneralBigInt",
+                data: {
+                  limit: limit,
+                  over255Raw: token.value,
+                  overValue: value,
+                },
+              });
+            } else {
+              context.report({
+                node: token,
+                messageId: "valueOverGeneral",
+                data: {
+                  limit: limit,
+                  over255Raw: token.value,
+                  overValue: value,
+                },
+                fix(fixer) {
+                  return fixer.replaceText(token, value);
+                },
+              });
+            }
           }
         }
       },
