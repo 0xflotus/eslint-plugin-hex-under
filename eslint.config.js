@@ -4,7 +4,6 @@ const eslintPluginHexUnder = require("./eslint-plugin-hex-under");
 
 module.exports = [
   {
-    files: ["*.js"],
     plugins: {
       "hex-under": eslintPluginHexUnder,
     },

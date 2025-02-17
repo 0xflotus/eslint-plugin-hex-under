@@ -32,17 +32,18 @@ module.exports = {
             (token) => token.type === "Numeric" && token.value.startsWith("0x"),
           ) || [];
         for (const token of tokens) {
-          if (token.value > limit) {
+          const value = parseInt(token.value);
+          if (value > limit) {
             context.report({
               node: token,
               messageId: "valueOverGeneral",
               data: {
                 limit: limit,
                 over255Raw: token.value,
-                overValue: parseInt(token.value),
+                overValue: value,
               },
               fix(fixer) {
-                return fixer.replaceText(token, parseInt(token.value));
+                return fixer.replaceText(token, value);
               },
             });
           }
