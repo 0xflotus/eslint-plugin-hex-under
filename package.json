@@ -4,7 +4,7 @@
   "main": "eslint-plugin-hex-under.js",
   "scripts": {
     "lint": "prettier . --check && eslint .",
-    "test": "node hex-under-256.test.js"
+    "test": "node hex-under.test.js"
   },
   "repository": {
     "type": "git",
