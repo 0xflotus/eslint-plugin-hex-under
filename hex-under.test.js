@@ -12,6 +12,10 @@ ruleTester.run("hex-under", hexUnderRule, {
       code: "const foo = 0xff;",
     },
     {
+      options: [{ limit: 15 }],
+      code: "const foo = 0xf;",
+    },
+    {
       options: [{ limit: 256 }],
       code: "const foo = 0x100;",
     },

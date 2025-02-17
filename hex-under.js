@@ -1,6 +1,12 @@
 module.exports = {
   meta: {
-    type: "problem",
+    type: "suggestion",
+    version: "0.2.6",
+    defaultOptions: [
+      {
+        limit: 255,
+      },
+    ],
     docs: {
       description:
         "Proves that a hexadecimal number must be less than a specified value. Default is 255.",
@@ -26,7 +32,7 @@ module.exports = {
     },
   },
   create(context) {
-    const limit = context.options[0]?.limit || 255;
+    const limit = context.options[0]?.limit;
     return {
       onCodePathEnd: function (_codePath, node) {
         const tokens =
