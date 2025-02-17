@@ -1,8 +1,10 @@
 # eslint-plugin-hex-under
 
+Sometimes it's really hard for humans to read hexadecimal numbers and know the exact decimal value. 
+
 ## hex-under
 
-This ESLint plugin proves, if you use hexadecimal numbers in your variable declaration code, that its value is less than or equal a specified value (default: 255). If you use a hexadecimal number greater than this specified value, it will be transformed to its decimal value.
+This ESLint plugin proves, if you use hexadecimal numbers in your code, that its value is less than or equal a specified value (default: 255). If you use a hexadecimal number greater than this specified value, it will be transformed to its decimal value.
 
 ### Example
 
@@ -10,11 +12,30 @@ This ESLint plugin proves, if you use hexadecimal numbers in your variable decla
 // valid with { limit: 255 }
 const signal = 0xef;
 
+let func = () => 0xab;
+
+function add(a, b) {
+  return a + b + 0x1f;
+}
+
 // invalid with { limit: 255 }
 const signal = 0x21b;
 
+let func = () => 0xabc;
+
+function add(a, b) {
+  return a + b + 0x100;
+}
+
 // This can be transformed to:
 const signal = 539;
+
+let func = () => 2748;
+
+function add(a, b) {
+  return a + b + 256;
+}
+
 ```
 
 ## Integration
