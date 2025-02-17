@@ -24,13 +24,13 @@ ruleTester.run("hex-under", hexUnderRule, {
       code: "var foo = 0xff;",
     },
     {
-      code: "function func() {\n  return 0xff;\n}"
+      code: "function func() {\n  return 0xff;\n}",
     },
     {
-      code: "functionA(0xef);"
+      code: "functionA(0xef);",
     },
     {
-      code: "const func = () => 0xab;"
+      code: "const func = () => 0xab;",
     },
   ],
   invalid: [

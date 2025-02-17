@@ -42,10 +42,7 @@ module.exports = {
                 overValue: parseInt(token.value),
               },
               fix(fixer) {
-                return fixer.replaceText(
-                  token,
-                  parseInt(token.value),
-                );
+                return fixer.replaceText(token, parseInt(token.value));
               },
             });
           }
