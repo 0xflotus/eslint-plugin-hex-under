@@ -1,7 +1,7 @@
 module.exports = {
   meta: {
     type: "suggestion",
-    version: "0.2.6",
+    version: "0.0.1",
     defaultOptions: [
       {
         limit: 255,
@@ -9,7 +9,7 @@ module.exports = {
     ],
     docs: {
       description:
-        "Proves that a hexadecimal number must be less than a specified value. Default is 255.",
+        "Proves that a hexadecimal bigint must be less than a specified value. Default is 255.",
     },
     fixable: "code",
     schema: [
@@ -25,8 +25,8 @@ module.exports = {
       },
     ],
     messages: {
-      valueOverGeneral:
-        "This number must be less than or equal {{ limit }}. {{ overValue }} ({{ over255Raw }}) is greater than {{ limit }}.",
+      valueOverGeneralBigInt:
+        "This bigint must be less than or equal {{ limit }}. {{ overValue }} ({{ over255Raw }}) is greater than {{ limit }}.",
     },
   },
   create(context) {
@@ -38,21 +38,18 @@ module.exports = {
             (token) =>
               ["Numeric", "Identifier"].some((el) => el === token.type) &&
               token.value.startsWith("0x") &&
-              !token.value.endsWith("n"),
+              token.value.endsWith("n"),
           ) || [];
         for (const token of tokens) {
           const value = parseInt(token.value);
           if (value > limit) {
             context.report({
               node: token,
-              messageId: "valueOverGeneral",
+              messageId: "valueOverGeneralBigInt",
               data: {
                 limit: limit,
                 over255Raw: token.value,
                 overValue: value,
-              },
-              fix(fixer) {
-                return fixer.replaceText(token, value);
               },
             });
           }
