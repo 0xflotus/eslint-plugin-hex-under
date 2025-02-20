@@ -4,7 +4,8 @@
   "main": "eslint-plugin-hex-under.js",
   "scripts": {
     "lint": "prettier . --check && eslint .",
-    "test": "node hex-under.test.js"
+    "test": "node hex-under.test.js",
+    "test:bigint": "node hex-under-bigint.test.js"
   },
   "repository": {
     "type": "git",
