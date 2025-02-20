@@ -1,5 +1,5 @@
 const { RuleTester } = require("eslint");
-const hexUnderRule = require("./hex-under");
+const hexUnderRule = require("../src/rules/hex-under");
 
 const ruleTester = new RuleTester({
   languageOptions: { ecmaVersion: 2015 },

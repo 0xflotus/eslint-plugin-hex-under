@@ -1,6 +1,6 @@
 "use strict";
 
-const eslintPluginHexUnder = require("./eslint-plugin-hex-under");
+const eslintPluginHexUnder = require("./src/eslint-plugin-hex-under");
 
 module.exports = [
   {

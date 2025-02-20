@@ -1,5 +1,5 @@
 const { RuleTester } = require("eslint");
-const hexUnderBigintRule = require("./hex-under-bigint");
+const hexUnderBigintRule = require("../src/rules/hex-under-bigint");
 
 const ruleTester = new RuleTester({
   languageOptions: {
